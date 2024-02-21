@@ -1,54 +1,68 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Register, UserList} from './screens';
 
-const App = () => {
+const Stack = createNativeStackNavigator();
+export default function App() {
+
   return (
-    <View style={styles.utama}>
-      <Text style={styles.title}>Welcome</Text>
-      <View>
-        <Text style={styles.textUsername}>Username</Text>
-        <TextInput style={styles.inputUsername} placeholder={'Masukan username anda'} />
-      </View>
-
-      <View>
-        <Text style={styles.textUsername}>Password</Text>
-        <TextInput style={styles.inputUsername} placeholder={'Masukan password anda'}/>
-      </View>
-
-      <TouchableOpacity style={styles.button} activeOpacity={.8}>
-        <Text style={{color: 'white'}}>Sign In</Text>
-      </TouchableOpacity>
-    </View>
-  )
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Registration" component={Register} />
+      <Stack.Screen name="UserList" component={UserList} />
+    </Stack.Navigator>
+  </NavigationContainer>
+  // <View><Text>TEst</Text></View>
+    // <ScrollView style={styles.scrollView}>
+    //   <View style={styles.container}>
+    //     <View style={styles.utama}>
+    //       <Text style={styles.title}>Users List</Text>
+    //       {userData.map(user => (
+    //         <View key={user.id} style={styles.userContainer}>
+    //           <Text style={styles.boldText}>Name: <Text style={styles.normalText}>{user.name}</Text></Text>
+    //           <Text style={styles.boldText}>Username: <Text style={styles.normalText}>{user.username}</Text></Text>
+    //           <Text style={styles.boldText}>Email: <Text style={styles.normalText}>{user.email}</Text></Text>
+    //           <Text style={styles.boldText}>Address: <Text style={styles.normalText}>{user.address.street}, {user.address.suite}, {user.address.city}, {user.address.zipcode}</Text></Text>
+    //           <Text style={styles.boldText}>Phone: <Text style={styles.normalText}>{user.phone}</Text></Text>
+    //         </View>
+    //       ))}
+    //     </View>
+    //   </View>
+    // </ScrollView>
+  );
 }
 
-export default App
-
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 35,
-    fontWeight:"900",
-    color:'black'
+  scrollView: {
+    flex: 1,
   },
-  utama: {
-    padding: 20
-  },
-  textUsername: {
-    marginTop: 25,
-    color: 'black',
-    fontWeight:"500"
-  },
-  inputUsername: {
+  container: {
+    flex: 1,
+    padding: 10,
     borderColor: 'black',
     borderWidth: 1,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    marginTop: 10
   },
-  button: {
-    backgroundColor: '#e66d28',
-    marginTop: 50,
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-  }
-})
+  utama: {
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 34,
+    fontWeight: '900',
+    marginBottom: 10,
+    color: 'black'
+  },
+  userContainer: {
+    marginBottom: 10,
+    padding: 10,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+  normalText: {
+    fontWeight: 'normal',
+  },
+});
